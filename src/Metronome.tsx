@@ -2,7 +2,12 @@
 import React, { Component } from "react";
 import Slider from "@material-ui/lab/Slider";
 import { Typography } from "@material-ui/core";
-export class Metronome extends React.Component {
+
+interface MetronomeState {
+    bpm: number;
+};
+
+export class Metronome extends React.Component<any, MetronomeState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,9 +21,7 @@ export class Metronome extends React.Component {
     render() {
         return (
             <div>
-             
                 <div>
-
                     <Typography id="slider-image">Metronome {this.state.bpm}</Typography>
                     <Slider
                         style={{ padding: "22px 22px", color: "blue", width: 300 }}
@@ -28,7 +31,6 @@ export class Metronome extends React.Component {
                         step={1}
                         value={this.state.bpm}
                         onChange={this.moveSlider} />
-                        
                 </div>
             </div>
         );

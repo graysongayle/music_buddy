@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { AppBar, Toolbar, createMuiTheme, MuiThemeProvider, Paper, Drawer, ListItem, ListItemText, Divider } from "@material-ui/core"
 import { Metronome } from "./Metronome";
+import { DrawerMenu } from "./DrawerMenu";
 
 const theme = createMuiTheme({
   palette: {
@@ -23,13 +24,11 @@ class App extends React.Component {
     }
   }
 
-
-
   render() {
     return <MuiThemeProvider theme={theme}>
       <div className="App">
 
-        <AppBar className="AppBar" position="static">
+        <AppBar style={{ marginRight: 64 }} className="AppBar" position="static">
           <Toolbar>
             Practice Routine
 
@@ -37,24 +36,8 @@ class App extends React.Component {
 
         </AppBar>
         Slider
-        <Metronome/>
-
-        {/* <Drawer  anchor="left" open variant="persistent">
-     
-          <ListItem style={{marginTop: 64}} button>
-            <ListItemText primary="First" />
-            <Divider />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText primary="Second" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText primary="Third" />
-          </ListItem>
-          <Divider />
-        </Drawer> */}
+        <Metronome />
+        <DrawerMenu />
         {/* <iframe src="../assets/Vacchiano-Trumpet-Routines.pdf" type="application/pdf" height="900px" width="500px" /> */}
       </div>
     </MuiThemeProvider>
