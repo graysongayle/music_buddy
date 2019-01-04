@@ -1,8 +1,9 @@
 
 
 import React from "react";
-import { Drawer, ListItem, ListItemText, Divider, AppBar, Toolbar, withStyles, StyledComponentProps, Theme, Typography } from '@material-ui/core';
+import { Drawer, ListItem, ListItemText, IconButton, Divider, AppBar, Toolbar, withStyles, StyledComponentProps, Theme, Typography } from '@material-ui/core';
 import { Metronome } from './Metronome';
+import Menu from '@material-ui/icons/Menu';
 
 class LayoutClass extends React.Component<any, any> {
     constructor(props) {
@@ -12,13 +13,18 @@ class LayoutClass extends React.Component<any, any> {
         }
     }
 
+    toggleMenu() {
+        this.setState({ open: !this.state.open });
+    }
+
     render() {
         const { classes } = this.props;
         return (
             <div>
                 <AppBar className={classes.appBar} position="fixed">
-                    <Toolbar>
+                    <Toolbar style={{padding: 0}}>
                         <div className={classes.toolbarWrapper}>
+                            <IconButton style={{margin: "0px 10px"}} onClick={() => this.toggleMenu()} color="secondary"><Menu /></IconButton>
                             <Typography variant="display1">Practice Routine</Typography>
                             <Metronome />
                         </div>
@@ -26,7 +32,7 @@ class LayoutClass extends React.Component<any, any> {
                 </AppBar>
                 <Drawer className={classes.drawer}
                     anchor="left"
-                    open
+                    open={this.state.open}
                     variant="persistent"
                     classes={{
                         paper: classes.drawerPaper,

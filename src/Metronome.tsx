@@ -43,8 +43,7 @@ export class Metronome extends React.Component<any, MetronomeState> {
                         onChange={this.moveSlider} />
                 </div>
                 <div>
-                    <IconButton color="secondary"> <PlayCircleFilledWhite/></IconButton>
-                    <IconButton color="secondary"> <PauseCircleFilled/></IconButton>
+                    <IconButton color="secondary"> <PlayCircleFilledWhite /></IconButton>
                     {/* <ToggleButtonGroup value={'left'} exclusive >
                         <ToggleButton style={{backgroundColor: Palette.Silk}} value="left">
                             <FormatAlignLeftIcon />
@@ -59,6 +58,9 @@ export class Metronome extends React.Component<any, MetronomeState> {
                             <FormatAlignJustifyIcon />
                         </ToggleButton>
                     </ToggleButtonGroup> */}
+                </div>
+                <div>
+                    <IconButton color="secondary"> <PauseCircleFilled /></IconButton>
                 </div>
 
             </div>
