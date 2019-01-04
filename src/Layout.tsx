@@ -1,7 +1,8 @@
 
 
 import React from "react";
-import { Drawer, ListItem, ListItemText, Divider, AppBar, Toolbar, withStyles, StyledComponentProps, Theme } from '@material-ui/core';
+import { Drawer, ListItem, ListItemText, Divider, AppBar, Toolbar, withStyles, StyledComponentProps, Theme, Typography } from '@material-ui/core';
+import { Metronome } from './Metronome';
 
 class LayoutClass extends React.Component<any, any> {
     constructor(props) {
@@ -17,7 +18,10 @@ class LayoutClass extends React.Component<any, any> {
             <div>
                 <AppBar className={classes.appBar} position="fixed">
                     <Toolbar>
-                        Practice Routine
+                        <div className={classes.toolbarWrapper}>
+                            <Typography variant="display1">Practice Routine</Typography>
+                            <Metronome />
+                        </div>
                     </Toolbar>
                 </AppBar>
                 <Drawer className={classes.drawer}
@@ -57,7 +61,11 @@ const styles = (theme: Theme) => ({
     appBar: {
         zIndex: theme.zIndex.drawer + 1
     },
-    toolbar: theme.mixins.toolbar
+    toolbar: theme.mixins.toolbar,
+    toolbarWrapper: {
+        display: 'flex',
+        alignItems: 'center'
+    }
 })
 
 export const Layout = withStyles(styles)(LayoutClass);

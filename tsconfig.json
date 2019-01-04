@@ -18,7 +18,7 @@
       "noUnusedLocals": false,
       "noUnusedParameters": false,
       "pretty": true,
-      "noEmitOnError": true,
+      "noEmitOnError": false,
       "alwaysStrict": true
     },
     "exclude": [
