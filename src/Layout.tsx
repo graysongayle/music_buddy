@@ -2,19 +2,18 @@
 
 import React from "react";
 import { Drawer, ListItem, ListItemText, IconButton, Divider, AppBar, Toolbar, withStyles, StyledComponentProps, Theme, Typography, InputBase, Paper, Button } from '@material-ui/core';
-import { Metronome } from './Metronome';
 import Menu from '@material-ui/icons/Menu';
 import { Palette } from './palette';
 import Search from '@material-ui/icons/SearchRounded';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import { string } from 'prop-types';
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-
+import moment from "moment";
 class LayoutClass extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            open: true,
+            open: false,
             dateSearch: ''
         }
     }
@@ -23,21 +22,29 @@ class LayoutClass extends React.Component<any, any> {
         this.setState({ open: !this.state.open });
     }
 
+    scrollToToday() {
+        scroller.scrollTo(moment().format("MM.DD.YYYY"), {
+            duration: 1500,
+            delay: 100,
+            smooth: true,
+            offset: -63,
+        });
+    }
+
     searchDate(event: any) {
-       console.log("scrolling to", this.state.dateSearch);
         if (event) {
             event.preventDefault();
         }
         const element = document.getElementById(this.state.dateSearch);
         if (element) {
-          
+
             scroller.scrollTo(this.state.dateSearch, {
                 duration: 1500,
                 delay: 100,
                 smooth: true,
-                
-                offset: -70, 
-              });
+
+                offset: -70,
+            });
         }
     }
 
@@ -49,18 +56,15 @@ class LayoutClass extends React.Component<any, any> {
                     <Toolbar style={{ padding: 0 }}>
                         <IconButton style={{ margin: "0px 10px" }} onClick={() => this.toggleMenu()} color="secondary"><Menu /></IconButton>
                         <Typography style={{ flexGrow: 1 }} variant="display1">Timeline</Typography>
-
                         <Button onClick={() => {
-                            scroll.scrollToTop();
+                            this.scrollToToday();
                         }} style={{ position: "sticky", marginRight: 20 }} variant="raised">Today</Button>
-
-                        <Paper className="dateSearch" style={{height: 36, marginRight: 20, backgroundColor: Palette.LightPaleGold, display: 'flex', alignItems: 'center' }} elevation={2}>
+                        <Paper className="dateSearch" style={{ height: 36, marginRight: 20, backgroundColor: Palette.LightPaleGold, display: 'flex', alignItems: 'center' }} elevation={2}>
                             <IconButton onClick={() => { this.searchDate(undefined) }} color="secondary"><Search /></IconButton>
                             <form onSubmit={(e) => this.searchDate(e)}>
                                 <InputBase onChange={(e) => { this.setState({ dateSearch: e.target.value }) }} style={{ color: Palette.White }} className={classes.input} placeholder="Search By Date" />
                             </form>
                             <IconButton color="secondary"><CalendarToday /></IconButton>
-                            
                         </Paper>
                     </Toolbar>
                 </AppBar>

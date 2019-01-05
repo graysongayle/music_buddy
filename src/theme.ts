@@ -7,7 +7,7 @@ const themeOptions: ThemeOptions | any = {
         primary: {
             light: Palette.Silk,
             main: Palette.PaleGold,
-            dark: Palette.Charcoal,
+            dark: Palette.Silk,
             contrastText: Palette.White,
         },
         secondary: {

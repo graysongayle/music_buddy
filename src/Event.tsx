@@ -1,12 +1,16 @@
 import React from "react";
 import { Moment } from 'moment';
-import { Card, CardHeader, CardContent, Typography, CardActions, Button, Dialog, DialogTitle, DialogActions } from '@material-ui/core';
+import { Card, CardHeader, CardContent, Typography, CardActions, Button, Dialog, DialogTitle, DialogActions, IconButton } from '@material-ui/core';
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import moment from "moment";
+import WbSunny from '@material-ui/icons/WbSunny';
 
 interface EventProps {
     eventDate: Moment;
     subtitle?: string;
+    description?: string;
     rightJustified: boolean;
+    future: boolean;
 }
 
 interface EventState {
@@ -37,21 +41,25 @@ export class Event extends React.Component<EventProps, EventState> {
     }
 
     render() {
-        const { eventDate, rightJustified } = this.props;
+        const { eventDate, rightJustified, description } = this.props;
         const formattedDate = eventDate.format("MM.DD.YYYY");
+        const isToday = eventDate.isSame(moment(), 'day');
+
         return (
-            <Element name={formattedDate} className="element">
+            <Element name={formattedDate} className="eventContainer">
                 <div key={formattedDate} id={formattedDate} className={rightJustified ? "container right" : "container left"}>
                     {this.renderEventDialog()}
                     <Card className="content">
                         <CardHeader
                             title={formattedDate}
                             subheader="Subtitle"
+                            action={
+                                isToday ? <IconButton color="primary"><WbSunny /></IconButton> : undefined
+                            }
                         />
                         <CardContent>
                             <Typography component="p">
-                                This impressive paella is a perfect party dish and a fun meal to cook together with your
-                                guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                                {description}
                             </Typography>
                         </CardContent>
                         <CardActions>
@@ -59,6 +67,8 @@ export class Event extends React.Component<EventProps, EventState> {
                         </CardActions>
                     </Card>
                 </div>
+
+
             </Element>
         )
     }
