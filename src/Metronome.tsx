@@ -15,18 +15,24 @@ import PauseCircleFilled from '@material-ui/icons/PauseCircleFilled';
 
 interface MetronomeState {
     bpm: number;
+    play: boolean;
 };
 
 export class Metronome extends React.Component<any, MetronomeState> {
     constructor(props) {
         super(props);
         this.state = {
-            bpm: 50
+            bpm: 50,
+            play: false
         };
     }
     moveSlider = (event, value) => {
         this.setState({ bpm: value });
     };
+
+    toggleMetronome() {
+        this.setState({ play: !this.state.play })
+    }
 
     render() {
         return (
@@ -43,7 +49,9 @@ export class Metronome extends React.Component<any, MetronomeState> {
                         onChange={this.moveSlider} />
                 </div>
                 <div>
-                    <IconButton color="secondary"> <PlayCircleFilledWhite /></IconButton>
+                    <IconButton color="secondary" onClick={() => this.toggleMetronome()}>
+                        {this.state.play ? <PauseCircleFilled /> : <PlayCircleFilledWhite />}
+                    </IconButton>
                     {/* <ToggleButtonGroup value={'left'} exclusive >
                         <ToggleButton style={{backgroundColor: Palette.Silk}} value="left">
                             <FormatAlignLeftIcon />
@@ -59,9 +67,7 @@ export class Metronome extends React.Component<any, MetronomeState> {
                         </ToggleButton>
                     </ToggleButtonGroup> */}
                 </div>
-                <div>
-                    <IconButton color="secondary"> <PauseCircleFilled /></IconButton>
-                </div>
+
 
             </div>
         );
